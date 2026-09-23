@@ -94,7 +94,7 @@ if ($LASTEXITCODE -ne 0) {
     throw "Unable to query installed .NET SDKs. Details: $installedSdks"
 }
 
-if ($installedSdks -notmatch '8\.') {
+if (-not ($installedSdks -match '^\s*8\.')) {
     Write-Warning "No .NET 8 SDK detected. WinUI publish may fail until .NET 8 SDK is installed."
     Write-Host $installedSdks
 }
@@ -117,11 +117,11 @@ $publishArgs = @(
     '-c', $Configuration,
     '-r', $Runtime,
     '--self-contained', 'true',
-    '-p:Platform=' + $platform,
+    "-p:Platform=$platform",
     '-p:EnableMsixTooling=true',
     '-p:AppxBundle=Never',
     '-p:WindowsPackageType=None',
-    '-p:PublishReadyToRun=' + $publishReadyToRun,
+    "-p:PublishReadyToRun=$publishReadyToRun",
     '-p:WindowsAppSDKSelfContained=true',
     '-v', 'minimal',
     '-o', $OutputDir
