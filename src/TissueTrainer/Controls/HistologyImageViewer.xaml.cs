@@ -32,8 +32,9 @@ public sealed partial class HistologyImageViewer : UserControl
         }
 
         var bitmap = new BitmapImage();
-        await bitmap.SetSourceAsync(await Windows.Storage.FileIO.OpenReadAsync(
-            await Windows.Storage.StorageFile.GetFileFromPathAsync(imagePath)));
+        var file = await Windows.Storage.StorageFile.GetFileFromPathAsync(imagePath);
+        using var stream = await file.OpenReadAsync();
+        await bitmap.SetSourceAsync(stream);
 
         SlideImage.Source = bitmap;
         UpdateZoomText();
@@ -61,7 +62,8 @@ public sealed partial class HistologyImageViewer : UserControl
     private void ImageScrollViewer_PointerWheelChanged(object sender, PointerRoutedEventArgs e)
     {
         var properties = e.GetCurrentPoint(ImageScrollViewer).Properties;
-        if (properties.IsHorizontalMouseWheel || !properties.IsMouseWheel)
+
+        if (properties.IsHorizontalMouseWheel)
         {
             return;
         }
