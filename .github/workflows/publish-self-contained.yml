@@ -20,10 +20,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
 
-      - name: Setup .NET 8
+      - name: Setup .NET 8 (8.0.402+ required for Windows App SDK 1.6)
         uses: actions/setup-dotnet@v5
         with:
-          dotnet-version: '8.0.x'
+          dotnet-version: '8.0.402'
 
       - name: Setup MSBuild
         uses: microsoft/setup-msbuild@v2
@@ -36,6 +36,11 @@ jobs:
           dotnet --info
           dotnet --list-sdks
           msbuild -version
+          $sdkVersion = (dotnet --version)
+          Write-Host "Active SDK:" $sdkVersion
+          if ([version]$sdkVersion -lt [version]'8.0.402') {
+            throw "Windows App SDK 1.6 requires .NET SDK 8.0.402 or later. Active SDK: $sdkVersion"
+          }
 
       - name: Build app (Release x64)
         shell: pwsh
