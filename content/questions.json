@@ -1,0 +1,180 @@
+{
+  "questions": [
+    {
+      "id": "q_0001",
+      "type": "mcq",
+      "image": "images/lung/bronchus_001.jpg",
+      "prompt": "What tissue is shown?",
+      "options": [
+        "Respiratory epithelium",
+        "Squamous metaplasia",
+        "Adenocarcinoma",
+        "Hyaline cartilage"
+      ],
+      "correct_index": 0,
+      "categories": ["lung_resp_epithelium", "epithelium"],
+      "explanation": "Ciliated pseudostratified columnar epithelium with goblet cells indicates respiratory epithelium.",
+      "features": [
+        "Cilia on apical surface",
+        "Goblet cells present"
+      ],
+      "confusable_with": ["squamous_metaplasia"],
+      "difficulty": "beginner",
+      "active": true
+    },
+    {
+      "id": "q_0002",
+      "type": "mcq",
+      "image": "images/lung/metaplasia_001.jpg",
+      "prompt": "What best describes this epithelial change?",
+      "options": [
+        "Squamous metaplasia",
+        "Normal respiratory epithelium",
+        "Small cell carcinoma",
+        "Mesothelioma"
+      ],
+      "correct_index": 0,
+      "categories": ["squamous_metaplasia", "lung"],
+      "explanation": "Replacement of respiratory epithelium by squamous cells without dysplasia is squamous metaplasia.",
+      "features": [
+        "Lacks cilia",
+        "Squamous morphology"
+      ],
+      "confusable_with": ["lung_resp_epithelium"],
+      "difficulty": "intermediate",
+      "active": true
+    },
+    {
+      "id": "q_0003",
+      "type": "mcq",
+      "image": "images/liver/lobule_001.jpg",
+      "prompt": "Which structure is centered in this field?",
+      "options": [
+        "Central vein",
+        "Portal triad",
+        "Bile duct only",
+        "Glomerulus"
+      ],
+      "correct_index": 0,
+      "categories": ["liver_lobule", "liver"],
+      "explanation": "A classic hepatic lobule is centered on a central vein with cords of hepatocytes radiating outward.",
+      "features": [
+        "Hepatocyte plates",
+        "Central venule"
+      ],
+      "confusable_with": [],
+      "difficulty": "beginner",
+      "active": true
+    },
+    {
+      "id": "q_0004",
+      "type": "mcq",
+      "image": "images/colon/mucosa_001.jpg",
+      "prompt": "What mucosal type is shown?",
+      "options": [
+        "Colonic mucosa",
+        "Gastric mucosa",
+        "Small intestinal villi",
+        "Endocervical mucosa"
+      ],
+      "correct_index": 0,
+      "categories": ["colonic_mucosa", "colon"],
+      "explanation": "Straight crypts with abundant goblet cells and no villi are characteristic of colonic mucosa.",
+      "features": [
+        "Crypt architecture",
+        "Abundant goblet cells"
+      ],
+      "confusable_with": [],
+      "difficulty": "beginner",
+      "active": true
+    },
+    {
+      "id": "q_0005",
+      "type": "mcq",
+      "image": "images/skin/epidermis_001.jpg",
+      "prompt": "Which layer dominates this image?",
+      "options": [
+        "Epidermis",
+        "Reticular dermis",
+        "Subcutis",
+        "Cartilage"
+      ],
+      "correct_index": 0,
+      "categories": ["skin_epidermis", "skin"],
+      "explanation": "Layered keratinocytes with a stratum corneum indicate epidermis.",
+      "features": [
+        "Keratinocyte layers",
+        "Stratum corneum"
+      ],
+      "confusable_with": [],
+      "difficulty": "beginner",
+      "active": true
+    },
+    {
+      "id": "q_0006",
+      "type": "mcq",
+      "image": "images/muscle/smooth_001.jpg",
+      "prompt": "What tissue type is shown?",
+      "options": [
+        "Smooth muscle",
+        "Skeletal muscle",
+        "Cardiac muscle",
+        "Dense regular connective tissue"
+      ],
+      "correct_index": 0,
+      "categories": ["smooth_muscle"],
+      "explanation": "Spindle cells with central nuclei and no striations are characteristic of smooth muscle.",
+      "features": [
+        "Spindle-shaped cells",
+        "No cross-striations"
+      ],
+      "confusable_with": [],
+      "difficulty": "beginner",
+      "active": true
+    },
+    {
+      "id": "q_0007",
+      "type": "mcq",
+      "image": "images/lung/bronchus_002.jpg",
+      "prompt": "Which feature supports respiratory epithelium?",
+      "options": [
+        "Cilia and goblet cells",
+        "Keratin pearls",
+        "Hepatocyte plates",
+        "Osteoid seams"
+      ],
+      "correct_index": 0,
+      "categories": ["lung_resp_epithelium", "epithelium"],
+      "explanation": "Cilia and goblet cells are hallmark features of respiratory epithelium.",
+      "features": [
+        "Cilia",
+        "Goblet cells"
+      ],
+      "confusable_with": ["squamous_metaplasia"],
+      "difficulty": "beginner",
+      "active": true
+    },
+    {
+      "id": "q_0008",
+      "type": "mcq",
+      "image": "images/colon/mucosa_002.jpg",
+      "prompt": "Which cell type is most abundant in the crypts shown?",
+      "options": [
+        "Goblet cells",
+        "Parietal cells",
+        "Paneth cells",
+        "Clue cells"
+      ],
+      "correct_index": 0,
+      "categories": ["colonic_mucosa", "colon"],
+      "explanation": "Colonic crypts contain many mucin-producing goblet cells.",
+      "features": [
+        "Mucin-filled cytoplasm",
+        "Crypt architecture"
+      ],
+      "confusable_with": [],
+      "difficulty": "beginner",
+      "active": true
+    }
+  ]
+}

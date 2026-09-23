@@ -1,0 +1,103 @@
+{
+  "categories": [
+    {
+      "id": "lung",
+      "label": "Lung",
+      "parent": null,
+      "organ_system": "respiratory",
+      "stain": "H&E",
+      "difficulty": "beginner",
+      "curriculum_weight": 1.0
+    },
+    {
+      "id": "lung_resp_epithelium",
+      "label": "Respiratory epithelium",
+      "parent": "lung",
+      "organ_system": "respiratory",
+      "stain": "H&E",
+      "difficulty": "beginner",
+      "curriculum_weight": 1.0
+    },
+    {
+      "id": "squamous_metaplasia",
+      "label": "Squamous metaplasia",
+      "parent": "lung",
+      "organ_system": "respiratory",
+      "stain": "H&E",
+      "difficulty": "intermediate",
+      "curriculum_weight": 0.8
+    },
+    {
+      "id": "liver",
+      "label": "Liver",
+      "parent": null,
+      "organ_system": "gi",
+      "stain": "H&E",
+      "difficulty": "beginner",
+      "curriculum_weight": 1.0
+    },
+    {
+      "id": "liver_lobule",
+      "label": "Liver lobule",
+      "parent": "liver",
+      "organ_system": "gi",
+      "stain": "H&E",
+      "difficulty": "beginner",
+      "curriculum_weight": 1.0
+    },
+    {
+      "id": "colon",
+      "label": "Colon",
+      "parent": null,
+      "organ_system": "gi",
+      "stain": "H&E",
+      "difficulty": "beginner",
+      "curriculum_weight": 1.0
+    },
+    {
+      "id": "colonic_mucosa",
+      "label": "Colonic mucosa",
+      "parent": "colon",
+      "organ_system": "gi",
+      "stain": "H&E",
+      "difficulty": "beginner",
+      "curriculum_weight": 1.0
+    },
+    {
+      "id": "skin",
+      "label": "Skin",
+      "parent": null,
+      "organ_system": "integumentary",
+      "stain": "H&E",
+      "difficulty": "beginner",
+      "curriculum_weight": 1.0
+    },
+    {
+      "id": "skin_epidermis",
+      "label": "Epidermis",
+      "parent": "skin",
+      "organ_system": "integumentary",
+      "stain": "H&E",
+      "difficulty": "beginner",
+      "curriculum_weight": 1.0
+    },
+    {
+      "id": "smooth_muscle",
+      "label": "Smooth muscle",
+      "parent": null,
+      "organ_system": "musculoskeletal",
+      "stain": "H&E",
+      "difficulty": "beginner",
+      "curriculum_weight": 1.0
+    },
+    {
+      "id": "epithelium",
+      "label": "Epithelium (general)",
+      "parent": null,
+      "organ_system": "general",
+      "stain": "H&E",
+      "difficulty": "beginner",
+      "curriculum_weight": 1.0
+    }
+  ]
+}

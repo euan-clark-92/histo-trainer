@@ -1,0 +1,74 @@
+<Page
+    x:Class="TissueTrainer.Pages.HomePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ScrollViewer>
+        <Grid Padding="24" RowSpacing="20" MaxWidth="900">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <StackPanel Spacing="4">
+                <TextBlock Text="Tissue Recognition Trainer"
+                           FontSize="28"
+                           FontWeight="SemiBold" />
+                <TextBlock x:Name="ContentVersionText"
+                           Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                <TextBlock x:Name="StatusText"
+                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                           TextWrapping="Wrap" />
+            </StackPanel>
+
+            <StackPanel Grid.Row="1" Spacing="12">
+                <TextBlock Text="Today's Training"
+                           FontSize="18"
+                           FontWeight="SemiBold" />
+                <TextBlock Text="Adaptive session targeting your weak tissue categories."
+                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                           TextWrapping="Wrap" />
+                <Button x:Name="StartTrainingButton"
+                        Content="Start Training Session"
+                        HorizontalAlignment="Left"
+                        Style="{StaticResource AccentButtonStyle}"
+                        Click="StartTrainingButton_Click" />
+            </StackPanel>
+
+            <StackPanel Grid.Row="2" Spacing="12">
+                <TextBlock Text="Practice Weak Areas"
+                           FontSize="18"
+                           FontWeight="SemiBold" />
+                <TextBlock Text="Short focused drill on categories where you need the most help."
+                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                           TextWrapping="Wrap" />
+                <Button x:Name="StartWeakButton"
+                        Content="Practice Weak Areas"
+                        HorizontalAlignment="Left"
+                        Click="StartWeakButton_Click" />
+            </StackPanel>
+
+            <StackPanel Grid.Row="3" Spacing="12">
+                <TextBlock Text="Assessment"
+                           FontSize="18"
+                           FontWeight="SemiBold" />
+                <TextBlock Text="Formal check with feedback at the end of the session."
+                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                           TextWrapping="Wrap" />
+                <Button x:Name="StartAssessmentButton"
+                        Content="Start Assessment"
+                        HorizontalAlignment="Left"
+                        Click="StartAssessmentButton_Click" />
+            </StackPanel>
+
+            <Button Grid.Row="4"
+                    x:Name="ReloadContentButton"
+                    Content="Reload Content Pack"
+                    HorizontalAlignment="Left"
+                    Click="ReloadContentButton_Click" />
+        </Grid>
+    </ScrollViewer>
+</Page>

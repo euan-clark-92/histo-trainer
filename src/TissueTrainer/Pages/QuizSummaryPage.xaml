@@ -1,0 +1,66 @@
+<Page
+    x:Class="TissueTrainer.Pages.QuizSummaryPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ScrollViewer>
+        <StackPanel Padding="24" Spacing="20" MaxWidth="900">
+            <TextBlock Text="Session Summary"
+                       FontSize="28"
+                       FontWeight="SemiBold" />
+
+            <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1"
+                    CornerRadius="8"
+                    Padding="16">
+                <StackPanel Spacing="8">
+                    <TextBlock x:Name="ScoreText" FontSize="22" FontWeight="SemiBold" />
+                    <TextBlock x:Name="DurationText"
+                               Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                    <TextBlock x:Name="ModeText"
+                               Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                </StackPanel>
+            </Border>
+
+            <StackPanel x:Name="WeakAreasPanel" Spacing="8">
+                <TextBlock Text="Focus areas"
+                           FontSize="18"
+                           FontWeight="SemiBold" />
+                <TextBlock x:Name="WeakAreasText" TextWrapping="Wrap" />
+            </StackPanel>
+
+            <StackPanel x:Name="AssessmentReviewPanel"
+                        Spacing="12"
+                        Visibility="Collapsed">
+                <TextBlock Text="Assessment review"
+                           FontSize="18"
+                           FontWeight="SemiBold" />
+                <ItemsControl x:Name="ReviewList">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Margin="0,0,0,12"
+                                    Padding="12"
+                                    CornerRadius="8"
+                                    BorderThickness="1"
+                                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}">
+                                <StackPanel Spacing="4">
+                                    <TextBlock Text="{Binding Title}" FontWeight="SemiBold" />
+                                    <TextBlock Text="{Binding Detail}" TextWrapping="Wrap" />
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Spacing="8">
+                <Button Content="Practice Weak Areas"
+                        Click="PracticeWeakButton_Click" />
+                <Button Content="Back to Home"
+                        Style="{StaticResource AccentButtonStyle}"
+                        Click="BackHomeButton_Click" />
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

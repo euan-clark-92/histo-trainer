@@ -1,0 +1,40 @@
+name: Publish Self-Contained
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, master]
+    tags: ['v*']
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  publish-win-x64:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Publish self-contained build
+        shell: pwsh
+        run: ./scripts/publish-self-contained.ps1 -Runtime win-x64 -Configuration Release -CreateZip
+
+      - name: Upload deployment folder
+        uses: actions/upload-artifact@v4
+        with:
+          name: TissueTrainer-win-x64
+          path: dist/TissueTrainer-win-x64/
+          if-no-files-found: error
+
+      - name: Upload deployment zip
+        uses: actions/upload-artifact@v4
+        with:
+          name: TissueTrainer-win-x64-zip
+          path: dist/TissueTrainer-win-x64.zip
+          if-no-files-found: error

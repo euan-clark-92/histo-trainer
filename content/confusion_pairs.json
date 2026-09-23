@@ -1,0 +1,16 @@
+{
+  "pairs": [
+    {
+      "id": "cp_01",
+      "category_a": "lung_resp_epithelium",
+      "category_b": "squamous_metaplasia",
+      "trainer_note": "Metaplasia lacks cilia and shows squamous morphology without the goblet cell distribution of respiratory epithelium."
+    },
+    {
+      "id": "cp_02",
+      "category_a": "colonic_mucosa",
+      "category_b": "liver_lobule",
+      "trainer_note": "Colonic mucosa shows crypts and goblet cells; liver lobules show hepatocyte plates and a central vein."
+    }
+  ]
+}

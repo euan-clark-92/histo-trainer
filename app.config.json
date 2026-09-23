@@ -1,0 +1,11 @@
+{
+  "content_path": "content",
+  "training_session_size": 15,
+  "weak_session_size": 5,
+  "assessment_session_size": 20,
+  "assessment_pass_percent": 80,
+  "mastery_weak_threshold": 0.75,
+  "mastery_mastered_threshold": 0.90,
+  "mastery_min_attempts": 10,
+  "allow_network_content_path": true
+}
