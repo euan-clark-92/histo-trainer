@@ -37,10 +37,10 @@ jobs:
           dotnet --list-sdks
           msbuild -version
 
-      - name: Build solution (Release x64)
+      - name: Build app (Release x64)
         shell: pwsh
         run: |
-          dotnet build TissueTrainer.sln `
+          dotnet build src/TissueTrainer/TissueTrainer.csproj `
             -c Release `
             -p:Platform=x64 `
             -p:EnableMsixTooling=true `

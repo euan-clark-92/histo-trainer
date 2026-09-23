@@ -1,5 +1,6 @@
 using TissueTrainer.Core.Models;
 using TissueTrainer.Core.Services;
+using Xunit;
 
 namespace TissueTrainer.Core.Tests;
 
