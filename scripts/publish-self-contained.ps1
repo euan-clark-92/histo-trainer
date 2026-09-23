@@ -31,7 +31,9 @@ param(
 
     [string] $OutputDir = '',
 
-    [switch] $CreateZip
+    [switch] $CreateZip,
+
+    [switch] $SkipRestore
 )
 
 Set-StrictMode -Version Latest
@@ -51,6 +53,7 @@ function Get-PlatformFromRuntime([string] $Rid) {
 }
 
 $repoRoot = Resolve-Path (Join-Path $PSScriptRoot '..')
+$solutionPath = Join-Path $repoRoot 'TissueTrainer.sln'
 $projectPath = Join-Path $repoRoot 'src\TissueTrainer\TissueTrainer.csproj'
 $migrationsSource = Join-Path $repoRoot 'src\TissueTrainer.Data\Migrations'
 $contentSource = Join-Path $repoRoot 'content'
@@ -101,21 +104,44 @@ if (Test-Path $OutputDir) {
     Remove-Item -Path $OutputDir -Recurse -Force
 }
 
-Write-Step "Restoring NuGet packages"
-& dotnet restore $projectPath -p:Platform=$platform
-if ($LASTEXITCODE -ne 0) { throw "dotnet restore failed with exit code $LASTEXITCODE" }
+if (-not $SkipRestore) {
+    Write-Step "Restoring NuGet packages"
+    & dotnet restore $solutionPath -p:Platform=$platform -p:EnableMsixTooling=true -p:AppxBundle=Never
+    if ($LASTEXITCODE -ne 0) { throw "dotnet restore failed with exit code $LASTEXITCODE" }
+}
+
+$publishReadyToRun = if ($env:GITHUB_ACTIONS -eq 'true') { 'false' } else { 'true' }
+
+$publishArgs = @(
+    'publish', $projectPath,
+    '-c', $Configuration,
+    '-r', $Runtime,
+    '--self-contained', 'true',
+    '-p:Platform=' + $platform,
+    '-p:EnableMsixTooling=true',
+    '-p:AppxBundle=Never',
+    '-p:WindowsPackageType=None',
+    '-p:PublishReadyToRun=' + $publishReadyToRun,
+    '-p:WindowsAppSDKSelfContained=true',
+    '-v', 'minimal',
+    '-o', $OutputDir
+)
+
+if ($SkipRestore) {
+    $publishArgs += '--no-restore'
+}
 
 Write-Step "Publishing self-contained app"
-& dotnet publish $projectPath `
-    -c $Configuration `
-    -r $Runtime `
-    --self-contained true `
-    -p:Platform=$platform `
-    -p:PublishReadyToRun=true `
-    -p:WindowsAppSDKSelfContained=true `
-    -o $OutputDir
+& dotnet @publishArgs `
+    2>&1 | Tee-Object -FilePath (Join-Path $repoRoot 'publish.log')
 
-if ($LASTEXITCODE -ne 0) { throw "dotnet publish failed with exit code $LASTEXITCODE" }
+if ($LASTEXITCODE -ne 0) {
+    Write-Host "--- publish.log (tail) ---" -ForegroundColor Red
+    if (Test-Path (Join-Path $repoRoot 'publish.log')) {
+        Get-Content (Join-Path $repoRoot 'publish.log') -Tail 80
+    }
+    throw "dotnet publish failed with exit code $LASTEXITCODE"
+}
 
 Write-Step "Ensuring deployment files are present"
 $migrationsTarget = Join-Path $OutputDir 'Migrations'

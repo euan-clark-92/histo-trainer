@@ -1,0 +1,10 @@
+<Project>
+  <!-- Required when WinUI 3 references class libraries in GitHub Actions. -->
+  <PropertyGroup Condition="'$(EnableMsixTooling)' == ''">
+    <EnableMsixTooling>true</EnableMsixTooling>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
+    <PublishReadyToRun>false</PublishReadyToRun>
+  </PropertyGroup>
+</Project>

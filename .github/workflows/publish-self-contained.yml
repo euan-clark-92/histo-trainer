@@ -12,29 +12,68 @@ jobs:
   publish-win-x64:
     runs-on: windows-latest
 
+    env:
+      DOTNET_NOLOGO: true
+      DOTNET_CLI_TELEMETRY_OPTOUT: true
+
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup .NET 8
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: '8.0.x'
 
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Diagnose build environment
+        shell: pwsh
+        run: |
+          Write-Host "Runner OS:" $env:RUNNER_OS
+          Write-Host "GitHub Actions:" $env:GITHUB_ACTIONS
+          dotnet --info
+          dotnet --list-sdks
+          msbuild -version
+
+      - name: Build solution (Release x64)
+        shell: pwsh
+        run: |
+          dotnet build TissueTrainer.sln `
+            -c Release `
+            -p:Platform=x64 `
+            -p:EnableMsixTooling=true `
+            -p:AppxBundle=Never `
+            -v minimal
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
       - name: Publish self-contained build
         shell: pwsh
-        run: ./scripts/publish-self-contained.ps1 -Runtime win-x64 -Configuration Release -CreateZip
+        run: ./scripts/publish-self-contained.ps1 -Runtime win-x64 -Configuration Release -CreateZip -SkipRestore
 
       - name: Upload deployment folder
-        uses: actions/upload-artifact@v4
+        if: success()
+        uses: actions/upload-artifact@v5
         with:
           name: TissueTrainer-win-x64
           path: dist/TissueTrainer-win-x64/
           if-no-files-found: error
 
       - name: Upload deployment zip
-        uses: actions/upload-artifact@v4
+        if: success()
+        uses: actions/upload-artifact@v5
         with:
           name: TissueTrainer-win-x64-zip
           path: dist/TissueTrainer-win-x64.zip
           if-no-files-found: error
+
+      - name: Upload build logs on failure
+        if: failure()
+        uses: actions/upload-artifact@v5
+        with:
+          name: build-diagnostics
+          path: |
+            publish.log
+            dist/
+          if-no-files-found: ignore
