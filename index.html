@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f5f4ef">
+    <meta name="description" content="Practice histology identification with image-based quizzes and explanations.">
+    <title>Histology Trainer</title>
+    <link rel="stylesheet" href="./styles.css">
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="./" aria-label="Histology Trainer home">
+        <span class="brand-mark" aria-hidden="true">H</span>
+        <span>Histology Trainer</span>
+      </a>
+      <span class="header-note">A visual tissue-recognition quiz</span>
+    </header>
+
+    <main class="page-shell">
+      <div id="status-message" class="status-message" role="status" hidden></div>
+
+      <section id="home-screen" class="screen" aria-labelledby="home-title">
+        <div class="hero">
+          <p class="eyebrow">Learn to see the details</p>
+          <h1 id="home-title">Recognize the tissue.<br><span>Understand why.</span></h1>
+          <p class="hero-copy">Build confidence with real histology images, focused practice, and clear explanations after every answer.</p>
+          <div class="hero-meta">
+            <span class="meta-dot" aria-hidden="true"></span>
+            <span id="question-count">Loading question set…</span>
+            <span class="meta-divider" aria-hidden="true">/</span>
+            <span>Histology core curriculum</span>
+          </div>
+        </div>
+
+        <div class="session-heading">
+          <div>
+            <p class="eyebrow">Choose your session</p>
+            <h2>How would you like to study?</h2>
+          </div>
+          <label class="length-control" for="session-length">
+            Questions
+            <select id="session-length" aria-label="Questions per session">
+              <option value="5">5 questions</option>
+              <option value="8" selected>All questions</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="session-grid">
+          <article class="session-card session-card-featured">
+            <span class="card-icon" aria-hidden="true">✳</span>
+            <p class="card-kicker">Build your knowledge</p>
+            <h3>Daily practice</h3>
+            <p>Mix it up with a short set of questions. Get an explanation as soon as you answer.</p>
+            <button id="start-practice" class="button button-dark" type="button" disabled>Start practice <span aria-hidden="true">↗</span></button>
+          </article>
+          <article class="session-card">
+            <span class="card-icon card-icon-soft" aria-hidden="true">⌁</span>
+            <p class="card-kicker">Personalized review</p>
+            <h3>Practice weak areas</h3>
+            <p id="weak-description">Focus on categories where you have missed questions. Your progress stays on this device.</p>
+            <button id="start-weak" class="button button-light" type="button" disabled>Practice weak areas <span aria-hidden="true">↗</span></button>
+          </article>
+          <article class="session-card">
+            <span class="card-icon card-icon-soft" aria-hidden="true">◎</span>
+            <p class="card-kicker">Check your progress</p>
+            <h3>Assessment</h3>
+            <p>Test yourself without seeing explanations along the way. Review all answers when you finish.</p>
+            <button id="start-assessment" class="button button-light" type="button" disabled>Start assessment <span aria-hidden="true">↗</span></button>
+          </article>
+        </div>
+        <p class="privacy-note"><span aria-hidden="true">⌂</span> Your quiz progress is saved only in this browser.</p>
+      </section>
+
+      <section id="quiz-screen" class="screen" aria-labelledby="quiz-prompt" hidden>
+        <div class="quiz-topline">
+          <button id="quit-quiz" class="text-button" type="button"><span aria-hidden="true">←</span> Exit session</button>
+          <span id="session-mode" class="mode-pill"></span>
+          <span id="question-progress" class="progress-label"></span>
+        </div>
+        <div class="progress-track" role="progressbar" aria-label="Quiz progress" aria-valuemin="0" aria-valuemax="100">
+          <div id="progress-fill" class="progress-fill"></div>
+        </div>
+        <div class="quiz-layout">
+          <div class="image-panel">
+            <img id="question-image" alt="Histology specimen for the current question">
+            <button id="zoom-image" class="zoom-button" type="button" aria-label="Enlarge specimen image">⌕</button>
+            <span class="image-caption">H&amp;E stain <span aria-hidden="true">·</span> Select image to enlarge</span>
+          </div>
+          <div class="question-panel">
+            <p id="question-categories" class="eyebrow"></p>
+            <h1 id="quiz-prompt" tabindex="-1"></h1>
+            <form id="answer-form">
+              <fieldset id="answer-options" class="answer-options">
+                <legend class="sr-only">Choose the best answer</legend>
+              </fieldset>
+              <div id="feedback-panel" class="feedback-panel" aria-live="polite" hidden>
+                <p id="feedback-result" class="feedback-result"></p>
+                <p id="feedback-answer" class="feedback-answer"></p>
+                <p id="feedback-explanation" class="feedback-explanation"></p>
+                <ul id="feedback-features" class="feedback-features"></ul>
+              </div>
+              <div class="quiz-actions">
+                <button id="submit-answer" class="button button-dark" type="submit" disabled>Check answer <span aria-hidden="true">→</span></button>
+                <button id="next-question" class="button button-dark" type="button" hidden>Next question <span aria-hidden="true">→</span></button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section id="result-screen" class="screen" aria-labelledby="result-title" hidden>
+        <div class="result-header">
+          <p class="eyebrow">Session complete</p>
+          <h1 id="result-title">A little more practice goes a long way.</h1>
+          <p id="result-mode" class="result-mode"></p>
+          <div class="score-card">
+            <span id="result-score" class="score-value"></span>
+            <span id="result-duration" class="score-caption"></span>
+          </div>
+          <p id="result-recommendation" class="recommendation"></p>
+          <button id="back-home" class="button button-dark" type="button">Back to sessions <span aria-hidden="true">→</span></button>
+        </div>
+        <div class="review-section">
+          <p class="eyebrow">Your review</p>
+          <h2>Answers and explanations</h2>
+          <div id="answer-review" class="review-list"></div>
+        </div>
+      </section>
+    </main>
+
+    <dialog id="image-dialog" class="image-dialog" aria-label="Enlarged histology specimen">
+      <button id="close-image" class="dialog-close" type="button" aria-label="Close enlarged image">×</button>
+      <img id="large-image" alt="Enlarged histology specimen">
+    </dialog>
+
+    <footer class="site-footer">
+      <span>Histology Trainer</span>
+      <span>Study at your own pace.</span>
+    </footer>
+  </body>
+</html>
